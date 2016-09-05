@@ -11,7 +11,7 @@ ReactDOM.render(
 	<Router history={browserHistory}>
 		<Route path='/' component={Root}>
 			<IndexRoute component={App} />
-			<Route path='/:zip' component={Landings} />
+			<Route path='/landings' component={Landings} />
 			<Route path='*' component={NotFound} />
 		</Route>
 	</Router>,
