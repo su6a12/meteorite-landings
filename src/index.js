@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {browserHistory, Route, Router, IndexRoute} from 'react-router';
 import Root from './Root';
 import App from './App';
-import Landings from './Landings';
+import Landings from './components/Landings';
 import NotFound from './NotFound';
 
 
