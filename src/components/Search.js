@@ -9,9 +9,11 @@ class Search extends Component {
 	render() {
 		return (
 			<div>
-				<form onSubmit={(e) => this.props.onSubmitZip(this.refs.zip.value, e)}>
-					<input placeholder='Zip Code' ref='zip' />
-					<button>Find Landings!</button>
+				<form 
+					className='search' onSubmit={(e) => this.props.onSubmitZip(this.refs.zip.value, this.refs.miles.value, e)}>
+					<input className='search-input' placeholder='Zip Code' ref='zip' />
+					<input className='distance' placeholder='Search Radius (in miles)' ref='miles' />
+					<button className='search-btn'>Find Landings!</button>
 				</form>
 			</div>
 		);
