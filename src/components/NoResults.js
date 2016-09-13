@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 
-class NotFound extends Component {
+class NoResults extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
 			this.props.history.push('/')
-		}, 3000);
+		}, 1000);
 	}
 
 	render() {
 		return (
 			<div>
-				Not Found...Please Try Again
+				No landings found...Try a bigger radius
 			</div>
 		);
 	}
-}
+};
 
-export default NotFound;
+export default NoResults;

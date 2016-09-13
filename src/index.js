@@ -3,16 +3,18 @@ import ReactDOM from 'react-dom';
 import {browserHistory, Route, Router, IndexRoute} from 'react-router';
 import Root from './Root';
 import App from './App';
-import Landings from './components/Landings';
+import LandingsPage from './components/LandingsPage';
 import NotFound from './NotFound';
+import '../style.css';
 
 
 ReactDOM.render(
 	<Router history={browserHistory}>
 		<Route path='/' component={Root}>
 			<IndexRoute component={App} />
-			<Route path='/landings' component={Landings} />
+			<Route path='/landings' component={LandingsPage} />
 			<Route path='*' component={NotFound} />
 		</Route>
 	</Router>,
-	document.querySelector('.container'));
+	document.querySelector('.container')
+);

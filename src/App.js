@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 import axios from 'axios';
 import Search from './components/Search';
-import Landings from './components/Landings';
+import LandingsPage from './components/LandingsPage';
 
 const NASA_API_KEY = 'lTl1V7bM5lQiWXTXUktW2YlyL';
 const GEO_KEY = 'AIzaSyBxz0Pp6VZZlXwiSxkRKtzTAFsqSiH3llo';
@@ -19,7 +19,7 @@ class App extends Component {
 		this.state = {
 			zip: '',
 			meters: '',
-			results: {}
+			results: null
 		};
 
 		this.handleSubmitZip = this.handleSubmitZip.bind(this);
@@ -49,21 +49,34 @@ class App extends Component {
 			axios.get(NASA_URL, {
 				params: {
 					$$app_token: NASA_API_KEY,
-					$where: where
+					$where: where,
+					$limit: 10
 				}
 			})
 			.then((results) => {
 				this.setState({results});
-
 			});
 		});
 	}
 
 	render() {
+		let landings;
+		if (this.state.results) {
+			this.props.history.push(null, '/landings');
+			landings = (
+				<LandingsPage props={this.props} results={this.state.results} />
+			)
+		}
+		else {
+			landings = (
+				<Search onSubmitZip={this.handleSubmitZip} />
+			)
+		}
+
 		return (
 			<div>
 				<h1>Find The Closest Meteorite Landings</h1>
-				<Search onSubmitZip={this.handleSubmitZip} />
+				{landings}
 			</div>
 			
 		);
