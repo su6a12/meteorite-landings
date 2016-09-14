@@ -4,7 +4,7 @@ class NoResults extends Component {
 
 	componentDidMount() {
 		setTimeout(() => {
-			this.props.history.push('/')
+			
 		}, 1000);
 	}
 

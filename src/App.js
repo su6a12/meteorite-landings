@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import axios from 'axios';
 import Search from './components/Search';
 import LandingsPage from './components/LandingsPage';
+import LandingDetails from './components/LandingDetails';
 
 const NASA_API_KEY = 'lTl1V7bM5lQiWXTXUktW2YlyL';
 const GEO_KEY = 'AIzaSyBxz0Pp6VZZlXwiSxkRKtzTAFsqSiH3llo';
@@ -50,11 +51,12 @@ class App extends Component {
 				params: {
 					$$app_token: NASA_API_KEY,
 					$where: where,
-					$limit: 10
+					$limit: 100
 				}
 			})
 			.then((results) => {
 				this.setState({results});
+				//console.log(results);
 			});
 		});
 	}
@@ -62,7 +64,7 @@ class App extends Component {
 	render() {
 		let landings;
 		if (this.state.results) {
-			this.props.history.push(null, '/landings');
+			//this.context.router.push(null, '/landings');
 			landings = (
 				<LandingsPage props={this.props} results={this.state.results} />
 			)
