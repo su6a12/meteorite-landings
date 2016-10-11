@@ -1,28 +1,30 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router'; 
 import NoResults from './NoResults';
 import Landing from './Landing';
 
-const LandingsPage = (props) => {
 
-	let list;
-	if (props.results.data.length === 0) {
-		list = <NoResults />
+class LandingsPage extends Component {
+	constructor(props) {
+		super(props);
 	}
-	else {
-		list = props.results.data.map((landing, index) => {
-			console.log(landing, index);
-			return <Landing 
-								landing={landing} 
-								key={index} />
+	render() {
+		let list = this.props.results.data.map((landing, index) => {
+			return (
+					<Link to='/details'>
+						<Landing
+							landing={landing} 
+							key={index} />
+					</Link>
+						)
 		});
+		return (
+			<div>
+				<ul className='list-group'>
+					{list}
+				</ul>
+			</div>
+		)
 	}
-	return (
-		<div>
-			<ul className='list-group'>
-				{list}
-			</ul>
-		</div>
-	)
 }
-
 export default LandingsPage;

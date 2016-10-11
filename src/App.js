@@ -5,6 +5,7 @@ import axios from 'axios';
 import Search from './components/Search';
 import LandingsPage from './components/LandingsPage';
 import LandingDetails from './components/LandingDetails';
+import NoResults from './components/NoResults';
 
 const NASA_API_KEY = 'lTl1V7bM5lQiWXTXUktW2YlyL';
 const GEO_KEY = 'AIzaSyBxz0Pp6VZZlXwiSxkRKtzTAFsqSiH3llo';
@@ -45,6 +46,9 @@ class App extends Component {
 				long: data.data.results[0].geometry.location.lng
 			});
 		})
+		.catch((error) => {
+			console.log("error occurred", error);
+		})
 		.then(() => {
 			var where = `within_circle(geolocation,${this.state.long},${this.state.lat},${this.state.meters})`;
 			axios.get(NASA_URL, {
@@ -56,28 +60,47 @@ class App extends Component {
 			})
 			.then((results) => {
 				this.setState({results});
-				//console.log(results);
+				console.log(results);
 			});
 		});
 	}
 
 	render() {
-		let landings;
+		let landings, title;
+		// check that results is not null
 		if (this.state.results) {
-			//this.context.router.push(null, '/landings');
-			landings = (
-				<LandingsPage props={this.props} results={this.state.results} />
-			)
+			// check that results is empty
+			if (!this.state.results.data.length) {
+				landings = (
+					<NoResults />
+				)
+				title = (
+					<h1>Abort</h1>
+				)
+			// results not empty, display	
+			} else {
+				landings = (
+					<LandingsPage props={this.props} results={this.state.results} />
+				)
+				title = (
+					<h1>Results</h1>
+				)
+			}
 		}
+		// initial launch of page
+		// show text fields for input
 		else {
 			landings = (
 				<Search onSubmitZip={this.handleSubmitZip} />
+			)
+			title = (
+				<h1>Find The Closest Meteorite Landings</h1>
 			)
 		}
 
 		return (
 			<div>
-				<h1>Find The Closest Meteorite Landings</h1>
+				{title}
 				{landings}
 			</div>
 			
