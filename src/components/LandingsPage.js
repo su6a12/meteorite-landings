@@ -11,11 +11,9 @@ class LandingsPage extends Component {
 	render() {
 		let list = this.props.results.data.map((landing, index) => {
 			return (
-					<Link to='/details'>
 						<Landing
 							landing={landing} 
 							key={index} />
-					</Link>
 						)
 		});
 		return (
