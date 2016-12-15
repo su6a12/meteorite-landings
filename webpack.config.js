@@ -12,7 +12,7 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel',
 				exclude: /node_modules/,
-				presets: ['react', 'es2015']
+				presets: ['react', 'es2015', 'react-hmre']
 			},
 			{
 				test: /\.css$/,

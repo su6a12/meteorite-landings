@@ -14,7 +14,7 @@ ReactDOM.render(
 		<Route path='/' component={Root}>
 			<IndexRoute component={App} />
 			<Route path='/landings' component={LandingsPage} />
-			<Route path='/details/:id' component={LandingDetails} />
+			<Route path='/:id' component={LandingDetails} />
 			<Route path='*' component={NotFound} />
 		</Route>
 	</Router>,

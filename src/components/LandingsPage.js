@@ -3,7 +3,6 @@ import {Link} from 'react-router';
 import NoResults from './NoResults';
 import Landing from './Landing';
 
-
 class LandingsPage extends Component {
 	constructor(props) {
 		super(props);
@@ -12,16 +11,14 @@ class LandingsPage extends Component {
 		let list = this.props.results.data.map((landing, index) => {
 			return (
 						<Landing
-							landing={landing} 
+							landing={landing}
 							key={index} />
 						)
 		});
 		return (
-			<div>
-				<ul className='list-group'>
-					{list}
-				</ul>
-			</div>
+			<ul className='list-group'>
+				{list}
+			</ul>
 		)
 	}
 }

@@ -4,14 +4,13 @@ const NASA_API_KEY = 'lTl1V7bM5lQiWXTXUktW2YlyL';
 const GEO_KEY = 'AIzaSyBxz0Pp6VZZlXwiSxkRKtzTAFsqSiH3llo';
 const NASA_URL = 'https://data.nasa.gov/resource/y77d-th95.json';
 const GEO_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
-//const METER_PER_MILE = 1609.344;
+const METER_PER_MILE = 1609.344;
 
-
-// gets geolocation of zip code
-function getGeoLocation(zip) {
+// gets geolocation of postal code
+function getGeoLocation(postal_code) {
 	return axios.get(GEO_URL, {
 		params: {
-			address: zip,
+			address: postal_code,
 			key: GEO_KEY
 		}
 	});
@@ -23,15 +22,16 @@ function getList(where) {
 		params: {
 			$$app_token: NASA_API_KEY,
 			$where: where,
-			$limit: 100
 		}
 	});
 }
 
 var APICall = {
-	getLandings: function(zip, meters) {
+	getLandings: function(postal_code, miles) {
+		// need to convert miles to meters for API parameter
+		var meters = miles * METER_PER_MILE;
 		var where;
-		return getGeoLocation(zip)
+		return getGeoLocation(postal_code)
 		.then((geos) => {
 			var lat = geos.data.results[0].geometry.location.lat;
 			var long = geos.data.results[0].geometry.location.lng;
@@ -41,11 +41,15 @@ var APICall = {
 		.then((list) => {
 			return list;
 		})
-	//}
-}
-		
-		
-		
+	},
+	getEachLanding: function(id) {
+		return axios.get(NASA_URL, {
+			params: {
+				$$app_token: NASA_API_KEY,
+				id: id
+			}
+		});
+	}
 };
 
 module.exports = APICall;
