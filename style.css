@@ -30,6 +30,10 @@ ul {
 	list-style: none;
 }
 
+li {
+	margin: 0 10%;
+}
+
 a, a:hover {
 	text-decoration: none;
 	color: black;
@@ -44,4 +48,10 @@ a, a:hover {
 	font-weight: bold;
 	text-transform: uppercase;
 	text-align: right;
+}
+
+@media (min-width: 800px) {
+	li {
+		margin: 0 20%;
+	}
 }

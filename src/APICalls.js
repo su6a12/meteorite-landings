@@ -21,7 +21,7 @@ function getList(where) {
 	return axios.get(NASA_URL, {
 		params: {
 			$$app_token: NASA_API_KEY,
-			$where: where,
+			$where: where
 		}
 	});
 }
@@ -29,12 +29,12 @@ function getList(where) {
 var APICall = {
 	getLandings: function(postal_code, miles) {
 		// need to convert miles to meters for API parameter
-		var meters = miles * METER_PER_MILE;
-		var where;
+		let meters = miles * METER_PER_MILE;
+		let where;
 		return getGeoLocation(postal_code)
 		.then((geos) => {
-			var lat = geos.data.results[0].geometry.location.lat;
-			var long = geos.data.results[0].geometry.location.lng;
+			let lat = geos.data.results[0].geometry.location.lat;
+			let long = geos.data.results[0].geometry.location.lng;
 			where = `within_circle(geolocation,${long},${lat},${meters})`;
 			return getList(where);
 		})

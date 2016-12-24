@@ -8,7 +8,9 @@ class LandingsPage extends Component {
 		super(props);
 	}
 	render() {
-		let list = this.props.results.data.map((landing, index) => {
+		let listArray = this.props.results.data.slice(0, this.props.currentIndex);
+		console.log(listArray[0]);
+		let list = listArray.map((landing, index) => {
 			return (
 						<Landing
 							landing={landing}

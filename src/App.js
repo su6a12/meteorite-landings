@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
 import Search from './components/Search';
 import LandingsPage from './components/LandingsPage';
-import LandingDetails from './components/LandingDetails';
 import NoResults from './components/NoResults';
 import APICall from './APICalls';
 
@@ -15,10 +14,12 @@ class App extends Component {
 		this.state = {
 			postal_code: '',
 			miles: '',
+			currentIndexLimit: 20,
 			results: null
 		};
 
 		this.handleSubmitZip = this.handleSubmitZip.bind(this);
+		this.handleLoadMoreClick = this.handleLoadMoreClick.bind(this);
 	}
 
 	// calls Google Maps API to retrieve geolocation from user input zip code
@@ -31,12 +32,13 @@ class App extends Component {
 		APICall.getLandings(postal_code, miles)
 			.then((results) => {
 				this.setState({results});
-				console.log('from app', results);
 			});
 	}
 
 	handleLoadMoreClick(e) {
-
+		e.preventDefault();
+		let currentIndexLimit = this.state.currentIndexLimit;
+		this.setState({currentIndexLimit: currentIndexLimit + 20})
 	}
 
 	render() {
@@ -55,8 +57,8 @@ class App extends Component {
 			} else {
 				landings = (
 					<div>
-						<LandingsPage props={this.props} results={this.state.results}/>
-						<button onLoadMoreClick={this.props.handleLoadMoreClick}>More</button>
+						<LandingsPage currentIndex={this.state.currentIndexLimit} results={this.state.results}/>
+						<button onClick={this.handleLoadMoreClick}>Show Me More</button>
 					</div>
 				)
 				title = (
@@ -81,6 +83,7 @@ class App extends Component {
 			<div>
 				{title}
 				{landings}
+				{this.state.currentIndex}
 			</div>
 			
 		);
