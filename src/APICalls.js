@@ -21,7 +21,8 @@ function getList(where) {
 	return axios.get(NASA_URL, {
 		params: {
 			$$app_token: NASA_API_KEY,
-			$where: where
+			$where: where,
+			$limit: 50
 		}
 	});
 }

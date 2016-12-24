@@ -38,11 +38,16 @@ class App extends Component {
 	handleLoadMoreClick(e) {
 		e.preventDefault();
 		let currentIndexLimit = this.state.currentIndexLimit;
-		this.setState({currentIndexLimit: currentIndexLimit + 20})
+		if (this.state.results.data.length - currentIndexLimit < 20) {
+			this.setState({currentIndexLimit: this.state.results.data.length});
+		}
+		else {
+			this.setState({currentIndexLimit: currentIndexLimit + 20});
+		}
 	}
 
 	render() {
-		let landings, title;
+		let landings, title, showBtn;
 		// check that results is not null
 		if (this.state.results) {
 			// check that results is empty
@@ -53,12 +58,21 @@ class App extends Component {
 				title = (
 					<h1>Abort</h1>
 				)
-			// results not empty, display	
+			// results not empty, display
 			} else {
+				// check if we've reached the end of list
+				// if yes, hide show more button
+				if (this.state.results.data.length === this.state.currentIndexLimit) {
+					showBtn = <div></div>;
+				}
+				else {
+						showBtn = <button onClick={this.handleLoadMoreClick}>Show Me More</button>
+
+				}
+
 				landings = (
 					<div>
 						<LandingsPage currentIndex={this.state.currentIndexLimit} results={this.state.results}/>
-						<button onClick={this.handleLoadMoreClick}>Show Me More</button>
 					</div>
 				)
 				title = (
@@ -83,6 +97,7 @@ class App extends Component {
 			<div>
 				{title}
 				{landings}
+				{showBtn}
 				{this.state.currentIndex}
 			</div>
 			
