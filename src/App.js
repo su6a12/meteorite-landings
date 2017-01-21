@@ -32,6 +32,8 @@ class App extends Component {
 		APICall.getLandings(postal_code, miles)
 			.then((results) => {
 				this.setState({results});
+			}, (error) => {
+				console.log(error);
 			});
 	}
 

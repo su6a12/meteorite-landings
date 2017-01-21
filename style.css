@@ -45,7 +45,7 @@ a, a:hover {
 
 .prop-title {
 	display: inline-block;
-	font-weight: bold;
+	font-weight: 900;
 	text-transform: uppercase;
 	text-align: right;
 }

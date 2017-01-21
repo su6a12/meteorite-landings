@@ -4,8 +4,8 @@
   "description": "Search by zip code for a nearby meteorite landing",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --inline --hot",
-    "build": "webpack"
+    // "start": "webpack-dev-server --progress --inline --hot",
+    // "build": "webpack"
   },
   "keywords": [
     "react"
